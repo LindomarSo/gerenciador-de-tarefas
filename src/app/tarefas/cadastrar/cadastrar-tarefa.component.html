@@ -1,0 +1,31 @@
+<h1 class="my-3">Cadastrar Tarefa</h1>
+    <div class="col-md-12 bg-light py-5">
+        <form #formTarefa="ngForm">
+        <div class="mb-3 col-md-10 offset-md-1">
+            <label class="form-label" style="font-weight: 500;">Tarefa:</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="nome" 
+                name="nome"
+                [(ngModel)]="tarefa.nome"
+                #nome="ngModel"
+                minlength="5"
+                required
+                placeholder="Digite uma tarefa">
+        </div>
+        <div *ngIf="nome.errors && (nome.dirty || nome.touched)" class="col-md-10 offset-md-1 alert alert-danger">
+            <div [hidden]="!nome.errors.required">Digite a tarefa</div>
+            <div [hidden]="!nome.errors.minlength">A tarefa deve conter ao menos 5 caracteres</div>
+        </div>
+        <div class="text-center">
+            <input 
+                [disabled]="!formTarefa.form.valid"
+                type="submit"
+                (click)="cadastrar()"
+                value="Cadastrar"
+                class="btn btn-success"/>
+            <a [routerLink]="['/tarefas/listar']" class="btn btn-outline-info mx-2">Voltar</a>
+        </div>
+    </form>
+    </div>
